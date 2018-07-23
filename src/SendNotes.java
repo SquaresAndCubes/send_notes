@@ -3,49 +3,75 @@ CSCI430
 Week 3 Homework
 Java Notes Player with Linux Piping support
 Dependencies : Java 8, Jfugue (included in /jars folder), Linux (mkfifo command used to make named pipe)
+
+********Instructions**************
+* 1.  Please start PlayNotes application first and read instructions contained within.
+* 2.  Enter Notes to play, space delimited.  Advanced options (see below).
+*
+* Notes/Tones are represented by their respected letter designations.
+* For Example A B C D E , you will be delimiting them with spaces.
+* To set the duration of the Tone/Note, you add a 'q' for each quarter note time. For example Aqqq for 3/4 time of note A.
+* Full input example below (a typical scale with all half time notes):
+* Cqq Dqq Eqq Fqq Gqq Aqq Bqq Cqq
 */
 import java.util.Scanner;
 import java.io.RandomAccessFile;
 
 public class SendNotes {
 
-    //create new scanner object to take user input
-    static Scanner scan = new Scanner(System.in);
-
 
     public static void main(String[] args){
 
-        try {
+        RandomAccessFile pipe;
 
+        //create new scanner object to take user input
+        Scanner scan = new Scanner(System.in);
 
-            //random access file for writing to the <pipe_name>
-            RandomAccessFile pipe = new RandomAccessFile(
-                    //path to <pipe_name> made with Linux mkfifo command
-                    "/home/sqaresandcubes/notesPipe", "rw");
+        String notes;
 
-            while(true){
+        System.out.print("Have you started the PlayNotes application (y/n)? : ");
 
-                //Ask user for notes to play
-                System.out.print("Enter notes to play: \n");
+        String answer = scan.nextLine();
 
-                //scan for input and set to String notes variable
-                String notes = scan.nextLine();
+        if (answer.equals("y")) {
 
-                //give user message of input
-                System.out.println("Playing: " + notes + "\n");
+            try {
 
-                //write to pipe
-                pipe.write(notes.getBytes());
+                while (true) {
+                    //random access open file for writing to the <pipe_name>
+                    pipe = new RandomAccessFile(
+                            //path to <pipe_name> made with Linux mkfifo command
+                            "/home/sqaresandcubes/notesPipe", "rw");
+
+                    //Ask user for notes to play
+                    System.out.print("Enter notes to play: ");
+
+                    //scan for input and set to String notes variable
+                    notes = scan.nextLine();
+
+                    //give user message of input
+                    System.out.println("\nPlaying: " + notes + "\n");
+
+                    //write to pipe
+                    pipe.write(notes.getBytes());
+
+                    pipe.close();
+                }
 
             }
 
+            //catch all exceptions and print to console
+            catch (Exception e) {
+
+                e.printStackTrace();
+
+            }
 
         }
 
-        //catch all exceptions and print to console
-        catch (Exception e){
+        else {
 
-            e.printStackTrace();
+            System.out.print("Goodbye, please come back and start this application once you have started Play Notes");
 
         }
 
