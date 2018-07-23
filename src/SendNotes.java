@@ -55,6 +55,7 @@ public class SendNotes {
                     //write to pipe
                     pipe.write(notes.getBytes());
 
+                    //**important** pipe must be closed for PlayNotes to read the pipe
                     pipe.close();
                 }
 
