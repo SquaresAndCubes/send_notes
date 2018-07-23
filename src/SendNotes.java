@@ -29,7 +29,7 @@ public class SendNotes {
 
         String notes;
 
-        System.out.print("Have you started the PlayNotes application (y/n)? : ");
+        System.out.println("Have you started the PlayNotes application (y/n)? : ");
 
         String answer = scan.nextLine();
 
@@ -41,10 +41,10 @@ public class SendNotes {
                     //random access open file for writing to the <pipe_name>
                     pipe = new RandomAccessFile(
                             //path to <pipe_name> made with Linux mkfifo command
-                            "/home/sqaresandcubes/notesPipe", "rw");
+                            "/usr2/c_bvaalb/notesPipe", "rw");
 
                     //Ask user for notes to play
-                    System.out.print("Enter notes to play: ");
+                    System.out.println("Enter notes to play: ");
 
                     //scan for input and set to String notes variable
                     notes = scan.nextLine();
@@ -57,6 +57,23 @@ public class SendNotes {
 
                     //**important** pipe must be closed for PlayNotes to read the pipe
                     pipe.close();
+
+                    //ask user if they want to play notes otherwise exit program
+                    System.out.println("Would you like to play more notes (y/n)? : ");
+
+                    String continueyn = scan.nextLine();
+
+                    if (continueyn.equals("y")){
+
+                        continue;
+                    }
+
+                    else{
+
+                        System.out.println("Goodbye!");
+                        break;
+                    }
+
                 }
 
             }
@@ -72,7 +89,8 @@ public class SendNotes {
 
         else {
 
-            System.out.print("Goodbye, please come back and start this application once you have started Play Notes");
+            //tell user to start PlayNotes application and come back later
+            System.out.print("Goodbye, please come back and start this application once you have started PlayNotes");
 
         }
 
