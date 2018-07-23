@@ -6,13 +6,14 @@ Dependencies : Java 8, Jfugue (included in /jars folder), Linux (mkfifo command 
 
 ********Instructions**************
 * 1.  Please start PlayNotes application first and read instructions contained within.
-* 2.  Enter Notes to play, space delimited.  Advanced options (see below).
+* 2.  Start this application.
+* 3.  Enter Notes to play , space delimited (ie. A B C D).  Advanced options (see below).
 *
 * Notes/Tones are represented by their respected letter designations.
 * For Example A B C D E , you will be delimiting them with spaces.
 * To set the duration of the Tone/Note, you add a 'q' for each quarter note time. For example Aqqq for 3/4 time of note A.
-* Full input example below (a typical scale with all half time notes):
-* Cqq Dqq Eqq Fqq Gqq Aqq Bqq Cqq
+* Full input example below (a typical scale with different timed notes):
+* Cqq Dqqqq Eq Fqqq Gqqqq Aqq Bqqq Cqqqq
 */
 import java.util.Scanner;
 import java.io.RandomAccessFile;
